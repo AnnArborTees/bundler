@@ -33,7 +33,10 @@ namespace :bundler do
           unless test(:bundle, :check, *options)
             options << "--without #{fetch(:bundle_without)}" if fetch(:bundle_without)
             options << "#{fetch(:bundle_flags)}" if fetch(:bundle_flags)
-            execute :bundle, :install, *options
+
+            with_rvm fetch(:rvm_ruby_version), fetch(:task_ruby_version) do
+              execute :bundle, :install, *options
+            end
           end
         end
       end
