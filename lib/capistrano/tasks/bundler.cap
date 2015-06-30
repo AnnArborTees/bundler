@@ -30,14 +30,14 @@ namespace :bundler do
           options << "--path #{fetch(:bundle_path)}" if fetch(:bundle_path)
           options << "--jobs #{fetch(:bundle_jobs)}" if fetch(:bundle_jobs)
 
-          unless with_rvm(fetch(:task_ruby_version)) { test(:bundle, :check, *options) }
+          # unless with_rvm(fetch(:task_ruby_version)) { test(:bundle, :check, *options) }
             options << "--without #{fetch(:bundle_without)}" if fetch(:bundle_without)
             options << "#{fetch(:bundle_flags)}" if fetch(:bundle_flags)
 
             with_rvm fetch(:rvm_ruby_version), fetch(:task_ruby_version) do
               execute :bundle, :install, *options
             end
-          end
+          # end
         end
       end
     end
