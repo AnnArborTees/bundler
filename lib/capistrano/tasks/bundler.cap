@@ -31,7 +31,7 @@ namespace :bundler do
           options << "--jobs #{fetch(:bundle_jobs)}" if fetch(:bundle_jobs)
 
           with_rvm fetch(:rvm_ruby_version), fetch(:rvm_task_ruby_version) do
-            execute 'gem list softwear-lib'
+            execute 'rvm rbx do gem list softwear-lib'
             if fetch(:skip_bundle_check) || !test(:bundle, :check, *options)
               options << "--without #{fetch(:bundle_without)}" if fetch(:bundle_without)
               options << "#{fetch(:bundle_flags)}" if fetch(:bundle_flags)
